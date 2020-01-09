@@ -1,0 +1,6 @@
+##### Github private and public key ####
+jenkins-master/conf/key/id_rsa
+jenkins-master/conf/key/id_rsa.pub
+
+##### Jenkins Credentials #####
+jenkins-master/conf/credentials.xml
