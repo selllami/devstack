@@ -68,10 +68,10 @@ services:
     volumes:
       - nexus-data:/nexus-data
     environment:
+      - CONTEXT_PATH=/nexus
       - MAX_HEAP=1200m
       - MIN_HEAP=500m
     ports:
       - "8081:8081"
-      - "8122:8122"
       - "8123:8123"
 

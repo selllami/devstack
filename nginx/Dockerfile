@@ -6,14 +6,12 @@ RUN yum -y install http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-
 RUN yum -y install nginx-1.10.1
 
 RUN rm /etc/nginx/conf.d/default.conf
-RUN rm -rf /etc/nginx/conf.d/jenkins.conf || true
-RUN rm -rf /etc/nginx/conf.d/portainer.conf || true
-RUN rm -rf /etc/nginx/conf.d/nexus.conf || true
 
-ADD conf/jenkins.conf /etc/nginx/conf.d/jenkins.conf
-ADD conf/portainer.conf /etc/nginx/conf.d/portainer.conf
+#ADD conf/jenkins.conf /etc/nginx/conf.d/jenkins.conf
+#ADD conf/portainer.conf /etc/nginx/conf.d/portainer.conf
+#ADD conf/nexus.conf /etc/nginx/conf.d/nexus.conf
+ADD conf/stack.conf /etc/nginx/conf.d/stack.conf
 ADD conf/nginx.conf /etc/nginx/nginx.conf
-ADD conf/nexus.conf /etc/nginx/conf.d/nexus.conf
 
 EXPOSE 80
 CMD ["nginx"]
