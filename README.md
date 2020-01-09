@@ -1,7 +1,7 @@
 # DevStack  
 This repository contains a devops stack.
 
-![Image of Stack]()
+![Image of Stack](https://i.ibb.co/yQfmRWN/stack.png)
 
 ## TODO
 - [x] Stack setup, create project architecture.
