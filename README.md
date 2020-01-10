@@ -22,7 +22,7 @@ git clone https://github.com/selllami/devstack.git
 sudo -- sh -c 'echo "192.168.0.XX\t jenkins-stack.local \n192.168.9.XX\t nexus-stack.local \n192.168.0.XX\t portainer-stack.local" >> /etc/hosts'
 ```
 
-4.Then you need to run docker-compose -p devstack up -d from the root folder. After the services are executed, you can navigate to urls bellow to see the applications running.
+4.Then you need to run `` docker-compose -p devstack up -d `` from the root folder. After the services are executed, you can navigate to urls bellow to see the applications running.
 * JENKINS:   http://jenkins-stack.local/
 * NEXUS:     http://nexus-stack.local/
 * PORTAINER: http://portainer-stack.local/
