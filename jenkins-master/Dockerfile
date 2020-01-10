@@ -26,6 +26,7 @@ RUN groupadd docker
 #RUN apt-get update
 RUN usermod -aG docker jenkins
 
+
 USER jenkins
 
 ENV JAVA_OPTS="-Xmx3192m"
@@ -35,5 +36,6 @@ ENV JENKINS_OPTS="--handlerCountMax=100 --logfile=/var/log/jenkins/jenkins.log -
 EXPOSE ${http_port}
 EXPOSE ${agent_port}
 
-COPY plugins.txt /usr/share/jenkins/plugins.txt
+COPY conf/credentials.xml /usr/share/jenkins/ref/credentials.xml
+COPY conf/plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
