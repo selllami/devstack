@@ -10,9 +10,6 @@ RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 ARG http_port=8080
 ARG agent_port=50000
 
-# see: https://issues.jenkins-ci.org/browse/JENKINS-35025
-# see: https://get.docker.com/builds/
-# see: https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Custom+Build+Environment+Plugin#CloudBeesDockerCustomBuildEnvironmentPlugin-DockerinDocker
 RUN curl -sSL -o /bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest
 RUN chmod +x /bin/docker
 
@@ -22,10 +19,17 @@ RUN mkdir /var/cache/jenkins
 RUN chown -R  jenkins:jenkins /var/log/jenkins
 RUN chown -R jenkins:jenkins /var/cache/jenkins
 
-RUN groupadd docker
-#RUN apt-get update
-RUN usermod -aG docker jenkins
+# Authorize Github SSH keys
+COPY conf/key/id_rsa	 /root/.ssh/id_rsa
+COPY conf/key/id_rsa.pub /root/.ssh/id_rsa.pub
+RUN chmod 600 /root/.ssh/id_rsa &&\
+    chmod 600 /root/.ssh/id_rsa.pub
+RUN echo "    IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config &&\
+    echo "    StrictHostKeyChecking no      " >> /etc/ssh/ssh_config
+RUN /bin/bash -c "eval '$(ssh-agent -s)'; ssh-add /root/.ssh/id_rsa;"
 
+RUN groupadd docker
+RUN usermod -aG docker jenkins
 
 USER jenkins
 
@@ -36,6 +40,8 @@ ENV JENKINS_OPTS="--handlerCountMax=100 --logfile=/var/log/jenkins/jenkins.log -
 EXPOSE ${http_port}
 EXPOSE ${agent_port}
 
-COPY conf/credentials.xml /usr/share/jenkins/ref/credentials.xml
-COPY conf/plugins.txt /usr/share/jenkins/plugins.txt
+#COPY conf/init.groovy.d	  /usr/share/jenkins/ref/init.groovy.d
+COPY conf/*.xml	/usr/share/jenkins/ref/
+#COPY conf/plugins/*.hpi	/usr/share/jenkins/ref/plugins/
+COPY conf/plugins.txt	/usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
