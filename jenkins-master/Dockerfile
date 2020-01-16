@@ -10,11 +10,16 @@ RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 ARG http_port=8080
 ARG agent_port=50000
 
-RUN curl -sSL -o /bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest
-RUN chmod +x /bin/docker
+#RUN curl -sSL -o /bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest
+#RUN chmod 777 /bin/docker
+#RUN curl -sSL -o /bin/docker https://get.docker.io/builds/Linux/x86_64/docker-latest
+#RUN chmod 777 /bin/docker
 
 RUN mkdir /var/log/jenkins
 RUN mkdir /var/cache/jenkins
+
+#RUN apt-get update
+
 
 RUN chown -R  jenkins:jenkins /var/log/jenkins
 RUN chown -R jenkins:jenkins /var/cache/jenkins
@@ -44,4 +49,4 @@ EXPOSE ${agent_port}
 COPY conf/*.xml	/usr/share/jenkins/ref/
 #COPY conf/plugins/*.hpi	/usr/share/jenkins/ref/plugins/
 COPY conf/plugins.txt	/usr/share/jenkins/plugins.txt
-RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt
+#RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.txt

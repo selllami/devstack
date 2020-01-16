@@ -4,6 +4,7 @@ antisamy-markup-formatter:1.6
 authentication-tokens:1.3
 branch-api:2.5.5
 build-timeout:1.19
+blueocean:latest
 cloudbees-folder:6.10.1
 credentials:2.3.0
 credentials-binding:1.20
@@ -43,8 +44,6 @@ metrics:latest
 momentjs:latest
 oic-auth:latest
 oauth-credentials:latest
-openid:latest
-openid4java:latest
 openshift-login:latest
 pam-auth:latest
 plain-credentials:latest

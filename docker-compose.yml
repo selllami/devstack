@@ -19,7 +19,7 @@ services:
     volumes:
       - jenkins-log:/var/log/jenkins
       - jenkins-data:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
+      - '/var/run/docker.sock:/var/run/docker.sock'
     networks:
       - stack-net
 
