@@ -19,7 +19,8 @@ services:
     volumes:
       - jenkins-log:/var/log/jenkins
       - jenkins-data:/var/jenkins_home
-      - '/var/run/docker.sock:/var/run/docker.sock'
+      - /var/run/docker.sock:/var/run/docker.sock
+      #- /usr/bin/docker:/usr/bin/docker
     networks:
       - stack-net
 
@@ -55,6 +56,7 @@ services:
     ports:
       - "8000:8000"
       - "9000:9000"
+    command: -H unix:///var/run/docker.sock
     networks:
       - stack-net
     volumes:
